@@ -99,19 +99,19 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix mul(IMatrix otherMatrix) throws IllegalArgumentException, NullPointerException {
-        if (this.getRows() != otherMatrix.getColumns()){
+        if (this.getRows() != otherMatrix.getColumns()) {
             System.out.println("Количество строк в первом множетеле не рано количеству столбцов во втором!");
             return null;
         }
-        if (this.getColumns() != otherMatrix.getRows()){
+        if (this.getColumns() != otherMatrix.getRows()) {
             System.out.println("Количество столбцов в первом множетеле не рано количеству строк во втором!");
             return null;
         }
         Matrix matrix = new Matrix(this.getRows(), otherMatrix.getColumns());
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
-                for (int k = 0; k < otherMatrix.getRows(); k++){
-                    matrix.setValueAt(i, j, matrix.getValueAt(i, j) * otherMatrix.getValueAt(i, j) + + (this.getValueAt(i, k) * otherMatrix.getValueAt(k, j)));
+                for (int k = 0; k < otherMatrix.getRows(); k++) {
+                    matrix.setValueAt(i, j, matrix.getValueAt(i, j) * otherMatrix.getValueAt(i, j) + +(this.getValueAt(i, k) * otherMatrix.getValueAt(k, j)));
                 }
             }
         }
@@ -151,6 +151,10 @@ public class Matrix implements IMatrix {
 
     @Override
     public double determinant() {
+        if (getRows() == 2 && getColumns() == 2) {
+
+        }
+
         return 0;
     }
 
@@ -168,16 +172,16 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isIdentityMatrix() {
-        int sum = 0;
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
                 if (numbers[i][i] != 1) {
                     return false;
+                } else if (i != j && numbers[i][j] != 0) {
+                    return false;
                 }
-                sum += numbers[i][j];
             }
         }
-        return sum == numbers.length;
+        return true;
     }
 
     @Override
