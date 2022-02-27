@@ -151,11 +151,35 @@ public class Matrix implements IMatrix {
 
     @Override
     public double determinant() {
-        if (getRows() == 2 && getColumns() == 2) {
+        Matrix matrix = new Matrix(this.getRows(), this.getColumns());
+        double result = 0;
 
+        if (getRows() == 1) {
+            result = matrix[0][0];
+            return (result);
         }
 
-        return 0;
+        if (getRows() == 2) {
+            result = ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
+            return (result);
+        }
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            numbers = new double[getRows() - 1][matrix[0].length - 1];
+
+            for (int j = 1; j < getRows(); j++) {
+                for (int k = 0; k < getColumns(); k++) {
+                    if (k < i) {
+                        numbers [j - 1][k] = matrix[j][k];
+                    } else if (k > i) {
+                        numbers [j - 1][k - 1] = matrix[j][k];
+                    }
+                }
+            }
+
+            result += matrix[0][i] * Math.pow (-1, (double) i) * determinant ();
+        }
+        return (result);
     }
 
     @Override

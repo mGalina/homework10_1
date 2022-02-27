@@ -113,6 +113,8 @@ public interface IMatrix {
      */
     double determinant();
 
+    double determinant(double[][] matrix);
+
     /**
      * Проверяет является ли текущая матрица нулевой<br/>
      * Нулевая матрица - матрица у которой все элементы нули:

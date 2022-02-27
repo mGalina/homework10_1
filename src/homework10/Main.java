@@ -61,7 +61,8 @@ public class Main {
         matrix1.printToConsole();
 
         //11.Вычисляет детерминант матрицы.
-
+        System.out.println("Детерминант матрицы: ");
+        System.out.println(matrix2.determinant());
 
         //12. Проверяет является ли текущая матрица нулевой
         System.out.println("Проверяет является ли текущая матрица нулевой: ");
